@@ -22,6 +22,7 @@ class Line:
 
     def get_line_select(self):
         if not os.path.exists('line.select'):
+            self.raw_select_rule.add('*')
             return
 
         for line in open('line.select').xreadlines():
@@ -131,10 +132,10 @@ class Line:
         self.get_rule_on_file()
 
         if len(self.rule_on_file) == 0:
-            print 'Not found line.select or no rules in it'
+            print "Not found 'line.select' or no rules in it"
             return
 
-        print 'Here are the rules in line.select:'
+        print "Here are the rules in 'line.select':"
         for i in range(0, len(self.rule_on_file)):
             if self.rule_on_file.has_key(i):
                 print self.rule_on_file.get(i).strip()
@@ -163,7 +164,7 @@ class Line:
     def delete_rule_from_file(self, rule):
         file_path = self.start_dir + os.sep + 'line.select'
         if not os.path.exists(file_path):
-            print 'line.select does not exist'
+            print "'line.select' does not exist"
         else:
             exist = False
             about_to_delete_rule_index = -1
@@ -192,41 +193,36 @@ class Line:
 def _main():
     command_parser = OptionParser(usage="%prog [options] [args]", version="%prog 0.6.0",
                                   description="Analyze the amount of lines and files under current directory following the rules in 'line.select' or analyze all files if 'line.select' doesn't exist")
-    command_parser.add_option("-r", "--recursive", action="store_true", dest="r_flag", default=False,
-                              help="make the analyze command act on current directory and their contents recursively")
-    command_parser.add_option("-m", "--moreinfo", action="store_true", dest="m_flag", default=False,
-                              help="show more information in the result")
+    command_parser.add_option("-d", "--detail", action="store_true", dest="d_flag", default=False,
+                              help="show more detail in the result")
     command_parser.add_option("-s", "--show", action="store_true", dest="show_rule_flag", default=False,
                               help="show rules in 'line.select'")
-    command_parser.add_option("-a", "--add", action="store", dest="add_rule_content", type="string",
-                              help="add a rule to the end of 'line.select'")
-    command_parser.add_option("-d", "--delete", action="store", dest="delete_rule_content", type="string",
-                              help="delete a rule in 'line.select")
+    # command_parser.add_option("-a", "--add", action="store", dest="add_rule_content", type="string",
+    #                           help="add a rule to the end of 'line.select'")
+    # command_parser.add_option("-d", "--delete", action="store", dest="delete_rule_content", type="string",
+    #                           help="delete a rule in 'line.select")
 
     command_options, command_args = command_parser.parse_args()
-    r_flag = command_options.r_flag
-    m_flag = command_options.m_flag
+    d_flag = command_options.d_flag
     show_rule_flag = command_options.show_rule_flag
-    add_rule_arg = command_options.add_rule_content
-    delete_rule_arg = command_options.delete_rule_content
+    # add_rule_arg = command_options.add_rule_content
+    # delete_rule_arg = command_options.delete_rule_content
 
     a = Line(os.getcwd())
 
     if show_rule_flag:
         a.show_rule_on_file()
-    elif add_rule_arg is not None:
-        a.add_rule_to_file(add_rule_arg)
-    elif delete_rule_arg is not None:
-        a.delete_rule_from_file(delete_rule_arg)
+    # elif add_rule_arg is not None:
+    #     a.add_rule_to_file(add_rule_arg)
+    # elif delete_rule_arg is not None:
+    #     a.delete_rule_from_file(delete_rule_arg)
     else:
-        output = 'Search in ' + os.getcwd() + os.sep
-        if r_flag:
-            output += ' recursively'
+        print 'Search in ' + os.getcwd() + os.sep
 
         a.get_line_select()
         a.find_files(os.getcwd(), 'filtrate')
 
-        if m_flag:
+        if d_flag:
             a.show_detail_result()
         else:
             a.show_result()
