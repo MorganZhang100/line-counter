@@ -1,38 +1,68 @@
 # line
-A command line tool to analyze the amount of lines and files under current directory
+A command line tool to analyze the amount of lines and files under current directory.   
+It support 'line.select' rules which works like '.gitignore'.
 
 ## Usage
 ```
-Usage: line [options]
+Usage: line [options] [args]
 
-Analyze the amount of lines and files under current directory
+Analyze the amount of lines and files under current directory following the
+rules in 'line.select' or analyze all files if 'line.select' doesn't exist
 
 Options:
-  --version        show program's version number and exit
-  -h, --help       show this help message and exit
-  -r, --recursive  make the command act on current directory and their
-                   contents recursively
+  --version     show program's version number and exit
+  -h, --help    show this help message and exit
+  -d, --detail  show more detail in the result
+  -s, --show    show rules in 'line.select'
 ```
 
 ## Example output
+Analyze all files under current directory. Only works when 'line.select' doesn't exist.
+```
+$ line
+Search in /Users/Morgan/Documents/Example/
+file count: 4
+line count: 839
+```
+Analyze all files under current directory. Only works when 'line.select' doesn't exist.  
+And show the results in detail.
+```
+$ line -d
+Search in /Users/Morgan/Documents/Example/
+Dir A/file C.c                                             72
+Dir A/file D.py                                           268
+file A.py                                                 467
+file B.c                                                   32
+file count: 4
+line count: 839
+```
+Show the rules in 'line.select'
+```
+$ line -s
+Here are the rules in 'line.select':
+#Select rules:
+*.c
 
+#Ignore rules:
+!Dir A
+!*.py
+```
+Check current version
 ```
 $ line --version
-line 0.1.0
-
-$ line
-Search in <Current Dir Name>
-file count: 2
-line count: 47
-
-$ line -r
-Search in <Current Dir Name> recursively
-file count: 4
-line count: 1008
+line 0.6.0
 ```
 
+##line.select
+This file works like '.gitignore'.
+* Each line is a rule
+* Each line starts with a '#' means that's a comment
+* Each line starts with a '!' means it's a ignore rule
+* Otherwise it's a select rule
+* The order of rules are irrelevant and ignore rule can always override select rule
+* The rules can find all the pathnames matching a specified pattern according to the rules used by the Unix shell. No tilde expansion is done, but *, ?, and character ranges expressed with [ ] will be correctly matched.
+
 ## Roadmap
-* lineignore support, which works like gitignore
 * easy installation support
 
 ## Author
