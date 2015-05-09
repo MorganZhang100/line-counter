@@ -21,7 +21,7 @@ setup(
     version=get_version(),
     description='A command line tool to analyze the amount of lines and files under current directory.',
     long_description=read_md('README.md'),
-    url='https://github.com/MorganZhang100/line',
+    url='https://github.com/MorganZhang100/line-counter',
     author='Morgan Zhang',
     author_email='MorganZhang100@gmail.com',
     license='MIT',

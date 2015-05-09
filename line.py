@@ -5,7 +5,7 @@ import glob
 from optparse import OptionParser
 import fnmatch
 
-__version__ = '0.7.0'
+__version__ = '0.7.1'
 
 class Line:
     def __init__(self, dir):
