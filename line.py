@@ -5,6 +5,8 @@ import glob
 from optparse import OptionParser
 import fnmatch
 
+__version__ = '0.7.0'
+
 class Line:
     def __init__(self, dir):
         self.raw_select_rule = set()
@@ -25,7 +27,7 @@ class Line:
             self.raw_select_rule.add('*')
             return
 
-        for line in open('line.select').xreadlines():
+        for line in open('line.select'):
             if line[0] == '#':
                 continue
 
@@ -101,20 +103,20 @@ class Line:
 
     def read_line_count(self, file_name):
         count = 0
-        for file_line in open(file_name).xreadlines():
+        for file_line in open(file_name):
             count += 1
         return count
 
     def show_result(self):
-        print 'file count: %d' % self.file_count
-        print 'line count: %d' % self.line_count
+        print('file count: %d' % self.file_count)
+        print('line count: %d' % self.line_count)
 
     def show_detail_result(self):
-        sorted_list = sorted(self.final_file_dic.iteritems(), key=lambda d: d[0], reverse=False)
+        sorted_list = sorted(self.final_file_dic.items(), key=lambda d: d[0], reverse=False)
         for one_file in sorted_list:
             file_name, file_lines = one_file
             file_name = file_name[len(self.start_dir) + 1:]
-            print '%-50s %10s' % (file_name, str(file_lines))
+            print('%-50s %10s' % (file_name, str(file_lines)))
 
         self.show_result()
 
@@ -124,7 +126,7 @@ class Line:
             return
 
         i = 0
-        for line in open(file_path).xreadlines():
+        for line in open(file_path):
             self.rule_on_file[i] = line
             i += 1
 
@@ -132,13 +134,13 @@ class Line:
         self.get_rule_on_file()
 
         if len(self.rule_on_file) == 0:
-            print "Not found 'line.select' or no rules in it"
+            print("Not found 'line.select' or no rules in it")
             return
 
-        print "Here are the rules in 'line.select':"
+        print("Here are the rules in 'line.select' under " + self.start_dir + os.sep + ":")
         for i in range(0, len(self.rule_on_file)):
-            if self.rule_on_file.has_key(i):
-                print self.rule_on_file.get(i).strip()
+            if i in self.rule_on_file:
+                print(self.rule_on_file.get(i).strip())
 
     def add_rule_to_file(self, rule):
         file_path = self.start_dir + os.sep + 'line.select'
@@ -146,25 +148,25 @@ class Line:
             rule_file = open(file_path, "w")
             rule_file.write(rule)
             rule_file.close()
-            print 'Add successfully'
+            print('Add successfully')
         else:
             exist = False
             self.get_rule_on_file()
             for r in self.rule_on_file:
                 if self.rule_on_file.get(r) == rule:
-                    print 'This rule already exists'
+                    print('This rule already exists')
                     exist = True
                     break
 
             if not exist:
                 rule_file = open(file_path, "a")
                 rule_file.write('\n' + rule)
-                print 'Add successfully'
+                print('Add successfully')
 
     def delete_rule_from_file(self, rule):
         file_path = self.start_dir + os.sep + 'line.select'
         if not os.path.exists(file_path):
-            print "'line.select' does not exist"
+            print("'line.select' does not exist")
         else:
             exist = False
             about_to_delete_rule_index = -1
@@ -184,14 +186,14 @@ class Line:
                         rule_file.write(self.rule_on_file.get(i))
 
                 rule_file.close()
-                print 'Delete successfully'
+                print('Delete successfully')
 
             if not exist:
-                print "This rule doesn't exist"
+                print("This rule doesn't exist")
 
 
 def _main():
-    command_parser = OptionParser(usage="%prog [options] [args]", version="%prog 0.6.0",
+    command_parser = OptionParser(usage="%prog [options] [args]", version="%prog " + __version__,
                                   description="Analyze the amount of lines and files under current directory following the rules in 'line.select' or analyze all files if 'line.select' doesn't exist")
     command_parser.add_option("-d", "--detail", action="store_true", dest="d_flag", default=False,
                               help="show more detail in the result")
@@ -217,7 +219,7 @@ def _main():
     # elif delete_rule_arg is not None:
     #     a.delete_rule_from_file(delete_rule_arg)
     else:
-        print 'Search in ' + os.getcwd() + os.sep
+        print('Search in ' + os.getcwd() + os.sep)
 
         a.get_line_select()
         a.find_files(os.getcwd(), 'filtrate')

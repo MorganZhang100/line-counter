@@ -1,6 +1,14 @@
-# line
+# line-counter
 A command line tool to analyze the amount of lines and files under current directory.   
-It support 'line.select' rules which works like '.gitignore'.
+It supports 'line.select' rules which works like '.gitignore'.
+
+## Installation
+You can install, upgrade, uninstall line-counter.py with these commands:
+```
+$ pip install line-counter  
+$ pip install --upgrade line-counter  
+$ pip uninstall line-counter  
+```
 
 ## Usage
 ```
@@ -39,7 +47,7 @@ line count: 839
 Show the rules in 'line.select'
 ```
 $ line -s
-Here are the rules in 'line.select':
+Here are the rules in 'line.select' under /Users/Morgan/Documents/Example/:
 #Select rules:
 *.c
 
@@ -50,7 +58,7 @@ Here are the rules in 'line.select':
 Check current version
 ```
 $ line --version
-line 0.6.0
+line 0.7.0
 ```
 
 ##line.select
@@ -59,11 +67,11 @@ This file works like '.gitignore'.
 * Each line starts with a '#' means that's a comment
 * Each line starts with a '!' means it's a ignore rule
 * Otherwise it's a select rule
-* The order of rules are irrelevant and ignore rule can always override select rule
+* The order of rules is irrelevant and ignore rules can always override select rules
 * The rules can find all the pathnames matching a specified pattern according to the rules used by the Unix shell. No tilde expansion is done, but *, ?, and character ranges expressed with [ ] will be correctly matched.
 
 ## Roadmap
-* easy installation support
+* Add order output function
 
 ## Author
 I'm Morgan Zhang, a graduate computer science student in University of San Francisco.  

@@ -1,1 +1,6 @@
 .idea/
+build/
+dist/
+line_counter.egg-info/
+*.pyc
+line.select
