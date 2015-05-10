@@ -24,7 +24,7 @@ Options:
   -s, --show    show rules in 'line.select'
 ```
 
-## Example output
+## Example usage and output
 Analyze all files under current directory. Only works when 'line.select' doesn't exist.
 ```
 $ line
@@ -58,10 +58,10 @@ Here are the rules in 'line.select' under /Users/Morgan/Documents/Example/:
 Check current version
 ```
 $ line --version
-line 0.7.0
+line 0.7.1
 ```
 
-##line.select
+## line.select
 This file works like '.gitignore'.
 * Each line is a rule
 * Each line starts with a '#' means that's a comment
@@ -72,6 +72,7 @@ This file works like '.gitignore'.
 
 ## Roadmap
 * Add order output function
+* Add option to only count file amount or line amount
 
 ## Author
 I'm Morgan Zhang, a graduate computer science student in University of San Francisco.  
