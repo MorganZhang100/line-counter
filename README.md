@@ -25,14 +25,14 @@ Options:
 ```
 
 ## Example usage and output
-Analyze all files (when 'line.select' doesn't exist) or specific files (when 'line.select' esists) under current directory.
+Analyze all files (when 'line.select' doesn't exist) or specific files (when 'line.select' exists) under current directory.
 ```
 $ line
 Search in /Users/Morgan/Documents/Example/
 file count: 4
 line count: 839
 ```
-Analyze all files (when 'line.select' doesn't exist) or specific files (when 'line.select' esists) under current directory.  
+Analyze all files (when 'line.select' doesn't exist) or specific files (when 'line.select' exists) under current directory.  
 And show results in detail.
 ```
 $ line -d
