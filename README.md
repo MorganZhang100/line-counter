@@ -58,7 +58,7 @@ Here are the rules in 'line.select' under /Users/Morgan/Documents/Example/:
 Check current version
 ```
 $ line --version
-line 0.7.2
+line 0.7.3
 ```
 
 ## line.select
