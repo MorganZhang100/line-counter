@@ -5,7 +5,8 @@ import glob
 from optparse import OptionParser
 import fnmatch
 
-__version__ = '0.7.1'
+__version__ = '0.7.3'
+
 
 class Line:
     def __init__(self, dir):
@@ -40,7 +41,13 @@ class Line:
                 self.raw_select_rule.add(line.strip())
 
     def find_files(self, path, mode):
-        file_and_folder = glob.glob(path + os.sep + '*')
+        path = path.replace('[',
+                            '[[]')
+        # "[" is a special character for Unix style file name matching pattern. If we want to match file name
+        # with a "[" in it, we have to add this line.
+
+        search_path = path + os.sep + '*'
+        file_and_folder = glob.glob(search_path)
 
         folders = filter(self.folder_filter, file_and_folder)
         files = filter(self.file_filter, file_and_folder)

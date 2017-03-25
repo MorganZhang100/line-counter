@@ -58,7 +58,7 @@ Here are the rules in 'line.select' under /Users/Morgan/Documents/Example/:
 Check current version
 ```
 $ line --version
-line 0.7.1
+line 0.7.2
 ```
 
 ## line.select
@@ -73,6 +73,13 @@ This file works like '.gitignore'.
 ## Roadmap
 * Add order output function
 * Add option to only count file amount or line amount
+
+## Change Log
+* **0.7.3**  03/25/2017  
+Fix the long description format on PyPI.
+
+* **0.7.2**  03/25/2017  
+Fix a bug that file cannot be matched when there is a '[' in the path.
 
 ## Author
 I'm Morgan Zhang, a graduate computer science student in University of San Francisco.  
