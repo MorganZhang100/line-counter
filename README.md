@@ -58,7 +58,7 @@ Here are the rules in 'line.select' under /Users/Morgan/Documents/Example/:
 Check current version
 ```
 $ line --version
-line 0.7.3
+line 0.7.4
 ```
 
 ## line.select
@@ -75,6 +75,9 @@ This file works like '.gitignore'.
 * Add option to only count file amount or line amount
 
 ## Change Log
+* **0.7.4**  03/25/2017  
+Fix distribution on PyPI.
+
 * **0.7.3**  03/25/2017  
 Fix the long description format on PyPI.
 
